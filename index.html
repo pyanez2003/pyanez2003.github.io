@@ -337,6 +337,37 @@
 
 
   <script src="js/main.js"></script>
+  <script>
+      const roles = [
+        "CS Student at USD",
+        "Training in Cybersecurity",
+        "STEM Instructor",
+        "Research Student",
+        "ACM Club Member",
+        "Cat Mom 🐱"
+      ];
+      const el = document.getElementById("typed-output");
+      let roleIdx = 0, charIdx = 0, deleting = false;
 
+      function type() {
+        const current = roles[roleIdx];
+        if (!deleting) {
+          el.textContent = current.slice(0, ++charIdx);
+          if (charIdx === current.length) {
+            deleting = true;
+            setTimeout(type, 1800);
+            return;
+          }
+        } else {
+          el.textContent = current.slice(0, --charIdx);
+          if (charIdx === 0) {
+            deleting = false;
+            roleIdx = (roleIdx + 1) % roles.length;
+          }
+        }
+        setTimeout(type, deleting ? 45 : 80);
+      }
+      setTimeout(type, 600);
+  </script>
   </body>
 </html>
